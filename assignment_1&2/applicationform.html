@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Application Form</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>    
+    <form name="reg_form" onsubmit="return validate()">
+	<div class="form-container">
+		<h2>Application Form</h2>
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text"  id="name" name="name" >
+            <span id="nameErr"  class="text-danger"></span>
+        </div>
+       <div class="form-group">
+			<label for="email">Email Address:</label>
+			<input type="email" id="email" name="email" >
+            <span id="emailErr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+			<label for="phone">Mobile Number</label>
+			<input type="tel" id="phone" name="phone">
+            <span id="phoneErr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+				<label for="country">Country</label>
+				<select class="form-control" id="country" name="country" >
+					<option value="">Select country</option>
+					<option value="India">India</option>
+					<option value="Pakistan">Pakistan</option>
+					<option value="Canada">Canada</option>
+					<option value="Germany">Germany</option>
+				</select>
+				<span id="countryErr" class="text-danger"></span>
+			</div>
+            <div class="form-group">
+				<label for="gender">Gender</label>
+				<input type="radio"  id="gender" name="gender" value="Male" >Male
+				<input type="radio"  id="gender" name="gender" value="Female" >Female
+				<span id="genderErr" class="text-danger"></span>
+			</div>
+            <div class="form-group">
+            <label for="hobbies">Hobbies (optional)</label>
+            <input type="checkbox" name="hobbies[]" value="sports">Sports
+            <input type="checkbox" name="hobbies[]" value="movies">Movies
+            <input type="checkbox" name="hobbies[]" value="music">Music
+            </div>
+            <div class="form-group">
+			<input type="submit" value="Submit">
+            </div>
+		</form>
+
+	</div>
+    <script>
+        function validate(){
+            var name=document.reg_form.name;
+            var email=document.reg_form.email;
+            var phone=document.reg_form.phone;
+            var country=document.reg_form.country;
+            var gender=document.reg_form.gender;
+            var nameError = document.getElementById("nameErr");
+            var emailError = document.getElementById("emailErr");
+            var phoneError = document.getElementById("phoneErr");
+            var countryError = document.getElementById("countryErr");
+            var genderError=document.getElementById("genderErr");
+        
+            nameError.innerHTML = "";
+            emailError.innerHTML = "";
+            phoneError.innerHTML = "";
+            countryError.innerHTML = "";
+            genderError.innerHTML=" ";
+
+            if(name.value.length<=0)
+            {
+                document.getElementById('nameErr').innerHTML="Please enter your name";
+                name.focus();
+                return false;
+            }
+            if(email.value.length<=0)
+            {
+                document.getElementById('emailErr').innerHTML="Please enter email address";
+                email.focus();
+                return false;
+            }
+            if(phone.value.length<=0)
+            {
+                document.getElementById('phoneErr').innerHTML="Please enter your mobile number";
+                phone.focus();
+                return false;
+            }
+            if(country.value.length<=0)
+            {
+                document.getElementById('countryErr').innerHTML="Please enter your country";
+                country.focus();
+                return false;
+            }
+            if(gender.value.length<=0)
+            {
+                event.preventDefault();
+                document.getElementById('genderErr').innerHTML="Please select your Gender";
+                gender.focus();
+                return false;
+            }
+        return true;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up Page</title>
+    <style>
+        body {
+            background-image: url("image1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .form-container {
+            background-color: rgba(75, 156, 118, 0.8);
+            padding: 20px;
+            margin: 50px auto;
+            width: 500px;
+            border-radius: 10px;
+        }
+        /* Style the form labels */
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Style the form inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Style the submit button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        /* Style error messages */
+        .alert {
+            color: #f00;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .text-danger {
+            color: red;
+          }
+          .valid {
+            border: 2px solid green;
+          }
+          
+          .invalid {
+            border: 2px solid red;
+          }
+    </style>
+	<script>
+       function validateForm() {
+			var username = document.forms["signup"]["username"].value;
+			var email = document.forms["signup"]["email"].value;
+			var password = document.forms["signup"]["password"].value;
+			var confirmPassword = document.forms["signup"]["confirm_password"].value;
+            var nameError = document.getElementById("nameErr");
+            var emailError = document.getElementById("emailErr");
+            var passwordError=document.getElementById("passErr");
+            var passwordError1=document.getElementById("pwdErr");
+        
+            nameError.innerHTML = "";
+            emailError.innerHTML = "";
+            passwordError.innerHTML = "";
+            passwordError1.innerHTML = "";
+            
+
+			// Validate username
+			if (username.length < 3 || username.length > 23) {
+				//alert("");
+                document.getElementById('nameErr').innerHTML="Username must be between 3 and 23 characters";
+				document.forms["signup"]["username"].focus();
+				return false;
+			}
+
+			// Validate email
+			var emailRegex = /^\S+@\S+\.\S+$/;
+			if (!emailRegex.test(email)) {
+				//alert("Invalid email address");
+                document.getElementById('emailErr').innerHTML="Invalid email address";
+				document.forms["signup"]["email"].focus();
+				return false;
+			}
+
+			// Validate password
+			var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+~`|}{:;"'<,>.?/\-])(?!.*\s).{8}$/;
+			if (!passwordRegex.test(password)) {
+				//alert("Password must contain at least one lowercase letter, one uppercase letter, one special character, and be no more than 8 characters long");
+				document.getElementById('passErr').innerHTML="Password must contain at least one lowercase letter, one uppercase letter, one special character, and be no more than 8 characters long";
+                document.forms["signup"]["password"].focus();
+				return false;
+			}
+
+			// Validate password and confirm password match
+			if (password !== confirmPassword) {
+				//alert("Passwords do not match. Please enter your password again");
+                document.getElementById('pwdErr').innerHTML="Passwords do not match. Please enter your password again"
+				document.forms["signup"]["password"].value = "";
+				document.forms["signup"]["confirm_password"].value = "";
+				document.forms["signup"]["password"].focus();
+				return false;
+			}
+
+			return true;
+		}
+	</script>
+</head>
+<body>
+	<form name="signup" onsubmit="return validateForm()">
+        <div class="form-container">
+            <h1>Sign-Up Form</h1>
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" minlength="3" maxlength="23"><br>
+        <span id="nameErr"  class="text-danger"></span>
+
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" ><br>
+        <span id="emailErr"  class="text-danger"></span>
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" maxlength="8" ><br>
+        <span id="passErr"  class="text-danger"></span>
+
+		<label for="confirm_password">Confirm Password:</label>
+		<input type="password" id="confirm_password" name="confirm_password" maxlength="8" ><br>
+        <span id="pwdErr"  class="text-danger"></span>
+
+		<input type="submit" value="Submit">
+        </div>
+	</form>
+</body>
+</html>
